@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import Container from '@material-ui/core/Container';
 import PersistentDrawerRight from './drawer';
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import TextCard from './textcard'
 import { Typography} from '@material-ui/core'
+import axios from 'axios'
 
 export default function Sector() {
+    const [sectors,setSectors] = useState([]);
     const list=['Activités spatiales', 'Administration', 'Affaires religieuses',
     'Affaires étrangeres', 'Agriculture', 'Amenagement du territoire',
     'Artisanat', 'Associations', 'Assurances', 'Audiovisuel',
@@ -25,6 +27,13 @@ export default function Sector() {
     'Santé animale', 'Système fiscal', 'Système social', 'Technologie',
     'Tourisme', 'Transport', 'Travaux publics', 'Télécommunications',
     'Urbanisme', 'Éducation et enseignement supérieur']
+    useEffect(() => {
+    axios
+      .get("http://0a6d1a89d512.ngrok.io/get_sectors")
+      .then(response => {
+        console.log(response.data)
+        setSectors(response.data['sectors'])});
+  }, []);
     return (
         <Container>
           <PersistentDrawerRight/>
@@ -32,12 +41,17 @@ export default function Sector() {
              La Liste des Secteurs
             </Typography>
           <Grid container align="center">
-          {list.map(sector =>(
+          {sectors.map(sector =>(
               <Grid item xs={12} sm={6} md={4} >
               <TextCard text={sector} />
               </Grid>
           ))}
           </Grid>
         </Container>
+        /*{list.map(sector =>(
+              <Grid item xs={12} sm={6} md={4} >
+              <TextCard text={sector} />
+              </Grid>
+          ))}*/
     )
 }

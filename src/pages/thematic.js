@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import Container from '@material-ui/core/Container';
 import PersistentDrawerRight from './drawer';
 import Grid from '@material-ui/core/Grid'
 import TextCard from './textcard'
 import {Typography} from '@material-ui/core'
+import axios from 'axios'
 export default function Thematic() {
+    const [thematics,setThematics] = useState([]);
     const list=['Accidents du travail', 'Acte de l’autorité publique',
     'Activités artistiques', 'Activités commerciales',
     'Activités spatiales', 'Administration',
@@ -113,6 +115,13 @@ export default function Thematic() {
     'Vignette automobile ', 'Voies de recours', 'Vétérinaire',
     'Zones sinistrées', 'Élections ', 'Établissements hospitaliers',
     'Établissements pénitentiaires ', 'Étiquetage']
+    useEffect(() => {
+    axios
+      .get("http://ac8b1a316af1.ngrok.io/get_thematics")
+      .then(response => {
+        console.log(response.data)
+        setThematics(response.data['thematics'])});
+  }, []);
     return (
         <Container>
           <PersistentDrawerRight/>
@@ -120,7 +129,7 @@ export default function Thematic() {
              La Liste des Thématiques
             </Typography>
           <Grid container align="center">
-          {list.map(thematic =>(
+          {thematics.map(thematic =>(
               <Grid item xs={12} sm={6} md={4} >
               <TextCard text={thematic} />
               </Grid>

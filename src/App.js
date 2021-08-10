@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 import Classify from './pages/Classify'
 import HomePage from './pages/HomePage';
 import Organism from './pages/organism' 
 import Sector from './pages/sector'
 import Thematic from './pages/thematic'
 import Type from './pages/type'
+import AddOrganism from './pages/addOrganism';
 import {createMuiTheme , ThemeProvider} from '@material-ui/core'
 import { cyan, purple } from '@material-ui/core/colors';
 
@@ -47,6 +49,9 @@ function App() {
         </Route>
         <Route path="/type">
           <Type />
+        </Route>
+        <Route path="/addOrganism">
+          <AddOrganism />
         </Route>
       </Switch>
     </Router>
