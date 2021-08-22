@@ -67,7 +67,7 @@ export default function Classify() {
       /*console.log(text)
       console.log(data) */
       
-    let response_type= await axios.post("http://e906a7f76075.ngrok.io/type_predict",data,{
+    let response_type= await axios.post("http://14ef-34-125-247-94.ngrok.io/type_predict",data,{
       headers:{
         'content-type':'application/json;charet=UTF-8',
         "Acces-Control-Allow-Origin":"*",
@@ -94,7 +94,7 @@ export default function Classify() {
       console.log(err)
     })*/
   /**************************** */
-    let response_organism= await axios.post("http://43d917805813.ngrok.io/organism_predict",data,{
+    let response_organism= await axios.post("http://b866-34-105-110-114.ngrok.io/organism_predict",data,{
       headers:{
         'content-type':'application/json;charet=UTF-8',
         "Acces-Control-Allow-Origin":"*",
@@ -109,7 +109,7 @@ export default function Classify() {
     data_organism['labels'].map(label =>(
       organisms=organisms +`, ${label}` )
     )
-    setOrganism({"labels":labels,'predictions':`:`+predictions})
+    setOrganism({"labels":labels,'predictions':predictions})
     /*
     .then(response_organism => {
       let data_organism=response_organism.data
@@ -130,7 +130,7 @@ export default function Classify() {
       console.log(err)
     })*/
      /*****************************/
-     const response_sector= await axios.post("http://0a6d1a89d512.ngrok.io/sector_predict",data,{
+     const response_sector= await axios.post("http://0d60-35-245-39-226.ngrok.io/sector_predict",data,{
       headers:{
         'content-type':'application/json;charet=UTF-8',
         "Acces-Control-Allow-Origin":"*",
@@ -153,7 +153,7 @@ export default function Classify() {
       console.log(err)
     })*/
   /*****************************/ 
-  const response_thematic= await axios.post("http://ac8b1a316af1.ngrok.io/thematic_predict",data,{
+  const response_thematic= await axios.post("http://de5c-34-125-109-2.ngrok.io/thematic_predict",data,{
     headers:{
       'content-type':'application/json;charet=UTF-8',
       "Acces-Control-Allow-Origin":"*",
@@ -181,8 +181,8 @@ export default function Classify() {
     function createData(name, value) {
       return { name, value };
     }
-    
-    
+    console.log(organism["labels"])
+    console.log(organism["predictions"])
     const rows = [
       createData('Organisme', ),
       createData('Secteur', ),
@@ -192,19 +192,22 @@ export default function Classify() {
     organism.labels.map(label =>(
       organisms_labels= (label.key==0) ? organisms_labels : organisms_labels +` ${label},` )
     )
-    organism.predictions.map(label =>(
+    let organism_pred=organism.predictions
+    if (!Array.isArray(organism.predictions)) console.log("resul is not an array ")
+    console.log(organism["predictions"][1])
+    organism["predictions"].map(label =>(
       organisms_predictions= (label.key==0) ? ':' : organisms_predictions +` ${label},` )
     )
     sector.labels.map(label =>(
       sectors_labels=sectors_labels +` ${label} ,` )
     )
-    sector.predictions.map(label =>(
+    Array.isArray(sector.predictions) && sector.predictions.map(label =>(
       sectors_predictions=sectors_predictions +` ${label} ,` )
     )
     thematic.labels.map(label =>(
       thematics_labels=thematics_labels +` ${label} ,` )
     )
-    thematic.predictions.map(label =>(
+    Array.isArray(thematic.predictions) && thematic.predictions.map(label =>(
       thematics_predictions=thematics_predictions +` ${label} ,` )
     )
   return (

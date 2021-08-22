@@ -40,7 +40,7 @@ export default function Type() {
      setTypes(data_response['types'])*/
     useEffect(() => {
     axios
-      .get("http://e906a7f76075.ngrok.io/get_types")
+      .get("http://6833-35-221-178-69.ngrok.io/get_types")
       .then(response => {
         console.log(response.data)
         setTypes(response.data['types'])});

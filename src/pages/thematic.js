@@ -117,7 +117,7 @@ export default function Thematic() {
     'Établissements pénitentiaires ', 'Étiquetage']
     useEffect(() => {
     axios
-      .get("http://ac8b1a316af1.ngrok.io/get_thematics")
+      .get("http://db3d-35-245-78-114.ngrok.io/get_thematics")
       .then(response => {
         console.log(response.data)
         setThematics(response.data['thematics'])});

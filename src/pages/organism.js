@@ -57,7 +57,7 @@ function Organism() {
     }
     useEffect(() => {
         axios
-      .get("http://43d917805813.ngrok.io/get_organisms")
+      .get("http://1a56-34-86-200-128.ngrok.io/get_organisms")
       .then(response => {
         console.log(response.data)
         setOrganisms(response.data['organisms'])});

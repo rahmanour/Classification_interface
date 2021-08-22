@@ -29,7 +29,7 @@ export default function Sector() {
     'Urbanisme', 'Éducation et enseignement supérieur']
     useEffect(() => {
     axios
-      .get("http://0a6d1a89d512.ngrok.io/get_sectors")
+      .get("http://13e9-35-237-236-33.ngrok.io/get_sectors")
       .then(response => {
         console.log(response.data)
         setSectors(response.data['sectors'])});
