@@ -7,40 +7,9 @@ import {Typography} from '@material-ui/core'
 import axios from 'axios'
 export default function Type() {
     const [types,setTypes] = useState([]);
-    const list=['Arrêté',
-    'Arrêté interministériel',
-    'Avis',
-    'Code',
-    'Communiqué',
-    'Convention internationale',
-    'Décision',
-    'Décret',
-    'Décret exécutif',
-    'Décret législatif',
-    'Décret présidentiel',
-    'Guide',
-    'Instruction',
-    'Jurisprudence',
-    'Loi',
-    'Ordonnance',
-    'Proclamation',
-    'Projet de décret exécutif',
-    'Rapport',
-    'Règlement',
-    'Télex ']
-    /*let response_type= axios.get("http://8f4057c4d654.ngrok.io/get_types",{
-      headers:{
-        'content-type':'application/json;charet=UTF-8',
-        "Acces-Control-Allow-Origin":"*",
-        'Accept':"text/plain",
-      }
-    })
-    let data_response=response_type.data
-    console.log(data_response)
-     setTypes(data_response['types'])*/
     useEffect(() => {
     axios
-      .get("http://6833-35-221-178-69.ngrok.io/get_types")
+      .get("http://c2ce-104-154-153-144.ngrok.io/get_types")
       .then(response => {
         console.log(response.data)
         setTypes(response.data['types'])});

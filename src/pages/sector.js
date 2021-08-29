@@ -9,27 +9,9 @@ import axios from 'axios'
 
 export default function Sector() {
     const [sectors,setSectors] = useState([]);
-    const list=['Activités spatiales', 'Administration', 'Affaires religieuses',
-    'Affaires étrangeres', 'Agriculture', 'Amenagement du territoire',
-    'Artisanat', 'Associations', 'Assurances', 'Audiovisuel',
-    'Aviation civile', 'Banque & Monnaie', 'Commerce',
-    'Commissariat et Expertise', 'Communication', 'Constitutionnel',
-    'Contexte local', 'Culture', 'Douanes', 'Défense nationale',
-    'Education', 'Energie', 'Environnement', 'Finance',
-    'Formation professionnelle', "Formes juridiques d'implantation",
-    'Habitat', 'Hydraulique et eau', 'Hydrocarbures', 'Industrie',
-    'Intérieur', 'Investissement', 'Jeunesse et sport',
-    'Jeunesse et sports', 'Judiciaire', 'Justice', 'Justice militaire',
-    'Legislation du travail', 'Marchés publics', 'Maritime',
-    'Normalisation', 'Nucléaire', 'Pharmaceutique',
-    'Procédure civile et administrative', 'Protocole international',
-    'Pénal', 'Pêche', 'Recherche scientifique', 'Sanitaire', 'Santé',
-    'Santé animale', 'Système fiscal', 'Système social', 'Technologie',
-    'Tourisme', 'Transport', 'Travaux publics', 'Télécommunications',
-    'Urbanisme', 'Éducation et enseignement supérieur']
     useEffect(() => {
     axios
-      .get("http://13e9-35-237-236-33.ngrok.io/get_sectors")
+      .get("http://3d6d-34-86-185-218.ngrok.io/get_sectors")
       .then(response => {
         console.log(response.data)
         setSectors(response.data['sectors'])});

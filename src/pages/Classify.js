@@ -64,44 +64,28 @@ export default function Classify() {
     e.preventDefault()
     if (text != ' ') { 
       let data=JSON.stringify({ text:text});
-      /*console.log(text)
-      console.log(data) */
-      
-    let response_type= await axios.post("http://14ef-34-125-247-94.ngrok.io/type_predict",data,{
+      axios.post("http://c2ce-104-154-153-144.ngrok.io/type_predict",data,{
+        headers:{
+          'content-type':'application/json;charet=UTF-8',
+          "Acces-Control-Allow-Origin":"*",
+          'Accept':"text/plain",
+        }
+      }).then((response) =>
+      { 
+        let data_response=response.data
+        setType({"label":data_response['label'],'prediction':data_response['prediction']})
+        console.log(type.label)
+        console.log(type.prediction)
+      })
+  
+  axios.post("http://6102-35-245-48-46.ngrok.io/organism_predict",data,{
       headers:{
         'content-type':'application/json;charet=UTF-8',
         "Acces-Control-Allow-Origin":"*",
         'Accept':"text/plain",
       }
-    })
-    let data_response=response_type.data
-    setType({"label":data_response['label'],'prediction':`:`+data_response['prediction']})
-    console.log(type.label)
-    console.log(type.prediction)
-    /*.then(response => {
-      let data_response=response.data
-      setType({"label":data_response['label'],'prediction':data_response['prediction']})
-      console.log(response.data)
-      console.log(response.request.status)
-      console.log(type.label)
-      console.log(type.prediction)
-      console.log(data_response['label'])
-      console.log(data_response['prediction'])
-      console.log(type.label)
-      console.log(type.prediction)
-    })
-    .catch(err =>{
-      console.log(err)
-    })*/
-  /**************************** */
-    let response_organism= await axios.post("http://b866-34-105-110-114.ngrok.io/organism_predict",data,{
-      headers:{
-        'content-type':'application/json;charet=UTF-8',
-        "Acces-Control-Allow-Origin":"*",
-        'Accept':"text/plain",
-      }
-    })
-    let  data_organism=response_organism.data
+    }).then((response) => {
+      let  data_organism=response.data
     console.log(data_organism['labels'])
     console.log(data_organism['predictions'])
     let labels=data_organism['labels']
@@ -110,73 +94,34 @@ export default function Classify() {
       organisms=organisms +`, ${label}` )
     )
     setOrganism({"labels":labels,'predictions':predictions})
-    /*
-    .then(response_organism => {
-      let data_organism=response_organism.data
-      let labels=data_organism['labels']
-      let predictions=data_organism['predictions']
-      setOrganism({"labels":labels,'predictions':predictions})
-      console.log(data_organism)
-      console.log(data_organism['labels'])
-      console.log(data_organism['predictions'])
-      console.log(organism.labels)
-      console.log(organism.predictions)
-      data_organism['labels'].map(label =>(
-        organisms=organisms +`, ${label}` )
-      )
-      console.log(organisms)
     })
-    .catch(err =>{
-      console.log(err)
-    })*/
-     /*****************************/
-     const response_sector= await axios.post("http://0d60-35-245-39-226.ngrok.io/sector_predict",data,{
+
+  axios.post(" http://3d6d-34-86-185-218.ngrok.io/sector_predict",data,{
       headers:{
         'content-type':'application/json;charet=UTF-8',
         "Acces-Control-Allow-Origin":"*",
         'Accept':"text/plain",
       }
-    })
-    let data_sector=response_sector.data
+    }).then((response) => {
+      let data_sector=response.data
     console.log(data_sector['labels'])
     console.log(data_sector['predictions'])
     setSector({"labels":data_sector['labels'],'predictions':`:`+data_sector['predictions']}) 
-    /*
-    .then(response_sector => {
-      let data_sector=response_sector.data
-      setSector({"labels":data_sector['labels'],'predictions':data_sector['predictions']})
-      console.log(data_sector)
-      console.log(sector.labels)
-      console.log(sector.predictions)
     })
-    .catch(err =>{
-      console.log(err)
-    })*/
-  /*****************************/ 
-  const response_thematic= await axios.post("http://de5c-34-125-109-2.ngrok.io/thematic_predict",data,{
+  axios.post("http://98e4-35-204-55-87.ngrok.io/thematic_predict",data,{
     headers:{
       'content-type':'application/json;charet=UTF-8',
       "Acces-Control-Allow-Origin":"*",
       'Accept':"text/plain",
     }
-  })
-  let data_thematic=response_thematic.data
-  console.log(data_sector['labels'])
-  console.log(data_sector['predictions'])
+  }).then((response)=>{
+  let data_thematic=response.data
+  console.log(data_thematic['labels'])
+  console.log(data_thematic['predictions'])
   setThematic({"labels":data_thematic['labels'],'predictions':`:`+data_thematic['predictions']})
-    /*
-  .then(response_thematic => {
-    let data_thematic=response_thematic.data
-    setThematic({"labels":data_thematic['labels'],'predictions':data_thematic['predictions']})
-    console.log(data_thematic)
-    console.log(thematic.labels)
-    console.log(thematic.predictions)
   })
-  .catch(err =>{
-    console.log(err)
-  })*/
     
- }}
+}}
     
     function createData(name, value) {
       return { name, value };
@@ -256,38 +201,31 @@ export default function Classify() {
               <TableCell component="th" scope="row">
                 Type
               </TableCell>
-              <TableCell > {type.label}  {type.prediction} </TableCell>
+              <TableCell > {type.label}   </TableCell>
         </TableRow>
         <TableRow key="Organism">
               <TableCell component="th" scope="row">
                 Organisme
               </TableCell> 
-              <TableCell> {organisms_labels}  {organisms_predictions} </TableCell>
+              <TableCell> {organisms_labels}   </TableCell>
         </TableRow>
         <TableRow key="Sector">
               <TableCell component="th" scope="row">
                 Secteur
               </TableCell> 
-              <TableCell> {sectors_labels}  {sectors_predictions} </TableCell>
+              <TableCell> {sectors_labels}  </TableCell>
         </TableRow>
         <TableRow key="Thematic">
               <TableCell component="th" scope="row">
                 Thématique
               </TableCell> 
-              <TableCell> {thematics_labels}  {thematics_predictions} </TableCell>
+              <TableCell> {thematics_labels}   </TableCell>
         </TableRow>
            
         </TableBody>
       </Table>
     </TableContainer>
     </Container>
-     /* {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell >{row.value}</TableCell>
-            </TableRow>
-          ))}*/
+     
   )
 }
